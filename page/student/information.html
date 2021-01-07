@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-form layuimini-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">班号:</label>
+        <div class="layui-input-block">
+            <p style="line-height: 36px;margin-left:50px">1001</p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">学号:</label>
+        <div class="layui-input-block">
+            <p style="line-height: 36px;margin-left:50px">1001</p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label ">姓名:</label>
+        <div class="layui-input-block">
+            <p style="line-height: 36px;margin-left:50px">徐武</p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label ">性别:</label>
+        <div class="layui-input-block">
+            <p style="line-height: 36px;margin-left:50px">男</p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">出生日期:</label>
+        <div class="layui-input-block">
+            <p style="line-height: 36px;margin-left:50px">1997-09-01</p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">籍贯:</label>
+        <div class="layui-input-inline" lay-verify="required">
+            <p style="line-height: 36px;margin-left:50px">山西太原</p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">QQ:</label>
+        <div class="layui-input-block">
+            <p style="line-height: 36px;margin-left:50px">957385895</p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">微信:</label>
+        <div class="layui-input-block">
+            <p style="line-height: 36px;margin-left:50px">173823434544</p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">联系方式:</label>
+        <div class="layui-input-block">
+            <p style="line-height: 36px;margin-left:50px">19038294749</p>
+        </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">备注:</label>
+        <div class="layui-input-block">
+            <p style="line-height: 36px;margin-left:50px">无</p>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal" lay-submit lay-filter="saveBtn">确认保存</button>
+<!--            <button type="reset" class="layui-btn layui-btn-primary">重置信息</button>-->
+        </div>
+    </div>
+</div>
+<script src="../../lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form','laydate','layarea'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            laydate = layui.laydate,
+            layarea = layui.layarea;
+        $ = layui.$;
+        //这是一个出生日期
+        laydate.render({
+            elem: '#briDate'
+        });
+
+
+        //这是联动选择框
+        layarea.render({
+            elem: '#area-picker',
+            // data: {
+            //     province: '广东省',
+            //     city: '深圳市',
+            //     county: '龙岗区',
+            // },
+            change: function (res) {
+                //选择结果
+                console.log(res);
+            }
+        });
+
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+            var index = layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            }, function () {
+
+                // 关闭弹出层
+                layer.close(index);
+
+                var iframeIndex = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(iframeIndex);
+
+            });
+
+            return false;
+        });
+
+    });
+</script>
+</body>
+</html>
